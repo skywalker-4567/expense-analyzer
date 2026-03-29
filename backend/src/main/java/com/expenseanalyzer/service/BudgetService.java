@@ -7,7 +7,7 @@ import com.expenseanalyzer.repository.BudgetRepository;
 import com.expenseanalyzer.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
+import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class BudgetService {
@@ -27,5 +27,8 @@ public class BudgetService {
                 .build();
 
         return budgetRepository.save(budget);
+    }
+    public List<Budget> getBudgets(Long userId, String month) {
+        return budgetRepository.findByUserIdAndMonth(userId, month);
     }
 }

@@ -31,4 +31,12 @@ public class BudgetController {
         Budget budget = budgetService.createBudget(userId, request);
         return ResponseEntity.status(HttpStatus.CREATED).body(budget);
     }
+    @GetMapping
+    public ResponseEntity<?> getBudgets(
+            @RequestHeader("Authorization") String authHeader,
+            @RequestParam String month
+    ) {
+        Long userId = extractUserId(authHeader);
+        return ResponseEntity.ok(budgetService.getBudgets(userId, month));
+    }
 }

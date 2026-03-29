@@ -12,4 +12,6 @@ public interface EmailExpenseRepository extends JpaRepository<EmailExpense, Long
     List<EmailExpense> findByUserIdAndDetectedFalse(Long userId);
 
     boolean existsByEmailId(String emailId); // prevents duplicate email processing
+
+    List<EmailExpense> findByUserId(Long userId);
 }

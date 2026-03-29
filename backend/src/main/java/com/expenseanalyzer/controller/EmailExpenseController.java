@@ -33,4 +33,11 @@ public class EmailExpenseController {
                 "expenseId", expense.getId()
         ));
     }
+    @GetMapping
+    public ResponseEntity<?> getEmailExpenses(
+            @RequestHeader("Authorization") String authHeader
+    ) {
+        Long userId = extractUserId(authHeader);
+        return ResponseEntity.ok(emailExpenseService.getEmailExpenses(userId));
+    }
 }

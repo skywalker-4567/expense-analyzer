@@ -59,7 +59,7 @@ export default function GmailIntegration() {
 
   const handleConnect = () => {
     // Redirects to backend OAuth flow — callback should redirect to /gmail?gmail=connected
-    window.location.href = `${import.meta.env.VITE_API_BASE_URL || "http://localhost:8080"}/api/integrations/gmail/connect`;
+    window.location.href = `https://expenso-backend-syv4.onrender.com/api/integrations/gmail/connect`;
   };
 
   const handleFetch = async () => {

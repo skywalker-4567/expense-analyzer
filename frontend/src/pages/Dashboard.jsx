@@ -29,7 +29,7 @@ export default function Dashboard() {
     const load = async () => {
       try {
         const [sumRes, expRes] = await Promise.all([
-          api.get("/api/expenses/summary"),
+          api.get(`/api/expenses/summary?month=${currentMonth}`)
           api.get(`/api/expenses?page=0&size=5&month=${currentMonth}`),
         ]);
         setSummary(sumRes.data);

@@ -29,7 +29,7 @@ google:
   client:
     id: ${GOOGLE_CLIENT_ID}
     secret: ${GOOGLE_CLIENT_SECRET}
-    redirect-uri: http://localhost:8080/api/integrations/gmail/callback
+    redirect-uri: https://expenso-backend-syv4.onrender.com/api/integrations/gmail/callback
 
 logging:
   level:

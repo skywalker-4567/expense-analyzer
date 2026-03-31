@@ -226,7 +226,8 @@ const styles = {
   pageSub: { color: "#475569", fontSize: 14, margin: "4px 0 0" },
   avatar: {
     width: 40, height: 40, background: "#6366f1", borderRadius: "50%",
-    display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, fontSize: 16,
+    display: "flex", alignItems: "center", justifyContent: "center",
+    fontWeight: 700, fontSize: 16, cursor: "pointer",  // add this
   },
   loader: { color: "#475569", marginTop: 60, textAlign: "center" },
   statsRow: { display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16, marginBottom: 24 },

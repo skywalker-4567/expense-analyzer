@@ -17,12 +17,17 @@ public class GmailController {
     private final JwtUtil jwtUtil;
 
     private Long extractUserId(String authHeader) {
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            throw new RuntimeException("Missing or invalid Authorization header");
+        }
         return jwtUtil.extractUserId(authHeader.substring(7));
     }
 
     @GetMapping("/connect")
-    public ResponseEntity<?> connect(@RequestHeader(value = "Authorization", required = false) String authHeader) {
-        Long userId = extractUserId(authHeader);
+    public ResponseEntity<?> connect(
+            @RequestHeader(value = "Authorization", required = false) String authHeader
+    ) {
+        Long userId = extractUserId(authHeader); // extractUserId already guards null now
         String authUrl = gmailService.buildAuthUrl(userId);
         return ResponseEntity.ok(Map.of("url", authUrl));
     }

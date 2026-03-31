@@ -18,13 +18,16 @@ public class EmailExpenseController {
     private final JwtUtil jwtUtil;
 
     private Long extractUserId(String authHeader) {
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            throw new RuntimeException("Missing or invalid Authorization header");
+        }
         return jwtUtil.extractUserId(authHeader.substring(7));
     }
 
     @PostMapping("/{id}/convert")
     public ResponseEntity<?> convertToExpense(
             @PathVariable Long id,
-            @RequestHeader("Authorization") String authHeader
+            @RequestHeader(value = "Authorization", required = false) String authHeader
     ) {
         Long userId = extractUserId(authHeader);
         Expense expense = emailExpenseService.convertToExpense(id, userId);
@@ -35,7 +38,7 @@ public class EmailExpenseController {
     }
     @GetMapping
     public ResponseEntity<?> getEmailExpenses(
-            @RequestHeader("Authorization") String authHeader
+            @RequestHeader(value = "Authorization", required = false) String authHeader
     ) {
         Long userId = extractUserId(authHeader);
         return ResponseEntity.ok(emailExpenseService.getEmailExpenses(userId));

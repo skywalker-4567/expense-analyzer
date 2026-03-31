@@ -57,9 +57,13 @@ export default function GmailIntegration() {
     }
   };
 
-  const handleConnect = () => {
-    // Redirects to backend OAuth flow — callback should redirect to /gmail?gmail=connected
-    window.location.href = `https://expenso-backend-syv4.onrender.com/api/integrations/gmail/connect`;
+  const handleConnect = async () => {
+    try {
+      const { data } = await api.get("/api/integrations/gmail/connect");
+      window.location.href = data.url; // redirect to Google OAuth consent screen
+    } catch (e) {
+      showToast("Failed to initiate Gmail connection", "error");
+    }
   };
 
   const handleFetch = async () => {

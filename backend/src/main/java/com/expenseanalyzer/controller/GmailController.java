@@ -2,10 +2,12 @@ package com.expenseanalyzer.controller;
 
 import com.expenseanalyzer.security.JwtUtil;
 import com.expenseanalyzer.service.GmailService;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.Map;
 
 @RestController
@@ -33,16 +35,17 @@ public class GmailController {
     }
 
     @GetMapping("/callback")
-    public ResponseEntity<?> callback(
+    public void callback(
             @RequestParam String code,
-            @RequestParam String state
-    ) {
+            @RequestParam String state,
+            HttpServletResponse response
+    ) throws IOException {
         try {
             Long userId = Long.parseLong(state);
             gmailService.exchangeCodeAndStoreToken(code, userId);
-            return ResponseEntity.ok(Map.of("message", "Gmail connected successfully"));
+            response.sendRedirect("https://expenso-frontend-bwde.onrender.com/gmail?gmail=connected");
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
+            response.sendRedirect("https://expenso-frontend-bwde.onrender.com/gmail?gmail=error");
         }
     }
 

@@ -8,7 +8,7 @@ import Expenses from "../pages/Expenses";
 import Budgets from "../pages/Budgets";
 import Insights from "../pages/Insights";
 import GmailIntegration from "../pages/GmailIntegration";
-import Profile from "./pages/Profile";
+import Profile from "../pages/Profile";
 export default function AppRouter() {
   return (
     <BrowserRouter>

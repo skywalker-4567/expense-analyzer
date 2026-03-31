@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   PieChart, Pie, Cell, Tooltip, ResponsiveContainer,
   AreaChart, Area, XAxis, YAxis, CartesianGrid,
@@ -18,6 +18,7 @@ const NAV = [
 ];
 
 export default function Dashboard() {
+const navigate = useNavigate();
   const { logout, user } = useAuth();
   const [summary, setSummary] = useState(null);
   const [recentExpenses, setRecentExpenses] = useState([]);
@@ -76,7 +77,9 @@ export default function Dashboard() {
             <h1 style={styles.pageTitle}>Overview</h1>
             <p style={styles.pageSub}>{currentMonth}</p>
           </div>
-          <div style={styles.avatar}>{user?.name?.[0]?.toUpperCase() || "U"}</div>
+          <div style={styles.avatar} onClick={() => navigate("/profile")} >
+            {user?.name?.[0]?.toUpperCase() || "U"}
+          </div>
         </header>
 
         {loading ? (

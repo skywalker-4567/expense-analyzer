@@ -21,7 +21,7 @@ public class GmailController {
     }
 
     @GetMapping("/connect")
-    public ResponseEntity<?> connect(@RequestHeader("Authorization") String authHeader) {
+    public ResponseEntity<?> connect(@RequestHeader(value = "Authorization", required = false) String authHeader) {
         Long userId = extractUserId(authHeader);
         String authUrl = gmailService.buildAuthUrl(userId);
         return ResponseEntity.ok(Map.of("url", authUrl));
@@ -43,7 +43,7 @@ public class GmailController {
 
     @PostMapping("/fetch")
     public ResponseEntity<?> fetchEmails(
-            @RequestHeader("Authorization") String authHeader
+            @RequestHeader(value = "Authorization", required = false) String authHeader
     ) {
         try {
             Long userId = extractUserId(authHeader);

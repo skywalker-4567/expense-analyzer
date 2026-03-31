@@ -26,7 +26,7 @@ public class ExpenseController {
 
     @PostMapping
     public ResponseEntity<?> createExpense(
-            @RequestHeader("Authorization") String authHeader,
+            @RequestHeader(value = "Authorization", required = false) String authHeader,
             @Valid @RequestBody ExpenseRequest request
     ) {
         Long userId = extractUserId(authHeader);
@@ -48,7 +48,7 @@ public class ExpenseController {
 
     @GetMapping("/summary")
     public ResponseEntity<?> getSummary(
-            @RequestHeader("Authorization") String authHeader,
+            @RequestHeader(value = "Authorization", required = false) String authHeader,
             @RequestParam String month
     ) {
         Long userId = extractUserId(authHeader);
